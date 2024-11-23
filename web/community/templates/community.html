@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커뮤니티</title>
+    <link rel="stylesheet" href="{% static 'css/community.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>커뮤니티</h1>
+            <nav>
+                <a href="{% url 'community:community' category_id=0 sort_by=1 %}" class="{% if category_id == 0 %}active{% endif %}">전체</a>
+                {% for category in categories %}
+                    <a href="{% url 'community:community' category_id=category.id sort_by=1 %}" 
+                       class="{% if category_id == category.id %}active{% endif %}">
+                       {{ category.name }}
+                    </a>
+                {% endfor %}
+            </nav>
+        </header>
+
+        <!-- Sorting Options -->
+        <div class="sort-options">
+            <a href="{% url 'community:community' category_id=category_id sort_by=1 %}" 
+               class="{% if sort_by == 1 %}active{% endif %}">최신순</a>
+            <a href="{% url 'community:community' category_id=category_id sort_by=2 %}" 
+               class="{% if sort_by == 2 %}active{% endif %}">오래된순</a>
+        </div>
+
+        <!-- Posts -->
+        <div class="posts">
+            {% if posts %}
+                {% for post_block in posts %}
+                    <a href="{% url 'community:post_detail' post_block.post.id %}" class="post">
+                        <h2>{{ post_block.post.title|truncatechars:20 }}</h2>
+                        <p class="category">{{ post_block.post.category.name }}</p>
+                        <div class="post-stats">
+                            <span>♡{{ post_block.like_count }} | 댓글: {{ post_block.comment_count }}</span>
+                            <span>작성자: {{ post_block.post.author.username }}</span>
+                            <span>{{ post_block.post.created_at|date:"Y-m-d H:i" }}</span>
+                        </div>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <p class="no-posts">등록된 게시글이 없습니다.</p>
+            {% endif %}
+        </div>
+
+        <!-- Create Post Button -->
+        {% if user.is_authenticated %}
+            <a href="{% url 'community:create_post' %}" class="write-button">글쓰기</a>
+        {% else %}
+            <p class="login-prompt">로그인 후 글쓰기가 가능합니다.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
