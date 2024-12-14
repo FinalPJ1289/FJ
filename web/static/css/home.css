@@ -1,0 +1,106 @@
+/* 공통 스타일 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "NotoSerifKR", sans-serif;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    min-height: 100vh;
+    background-color: #efefef;
+  }
+  
+  article {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  /* 헤더 스타일 */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #191919;
+    color: #fff;
+    border-radius: 10px;
+  }
+  
+  .logout-btn {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  /* 게시글 섹션 스타일 */
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .community-post {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #f9f9f9;
+  }
+  
+  .post-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .post-body {
+    font-size: 1em;
+    margin-bottom: 10px;
+  }
+  
+  .post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9em;
+  }
+  
+  .footer-buttons .footer-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .footer-buttons img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
+  
+  /* 푸터 스타일 */
+  footer {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+  }
+  
+  .button-box {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .footer-btn img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* 유틸리티 클래스 */
+  .active {
+    border: 2px solid #000;
+  }
+  

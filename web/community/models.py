@@ -7,7 +7,7 @@ class Post(models.Model):
     body = models.TextField(verbose_name="나의 이야기를 들려주세요", default="")
     created_at = models.DateTimeField(verbose_name="작성일", auto_now_add=True)
 
-    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    author = models.ForeignKey("accounts.User", on_delete=models.CASCADE, null=True, blank=True)
     
     def __str__(self):
         return self.title

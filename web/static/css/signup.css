@@ -1,0 +1,131 @@
+@font-face {
+    font-family: "NotoSerifKR";
+    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NotoSerifKR.woff") format("woff");
+  }
+  
+  header {
+    background-color: #191919;
+    border-radius: 10px;
+  }
+  
+  #signup {
+    font-size: 24px;
+  }
+  
+  form {
+    margin-top: 182px;
+    height: 750px;
+    border: none;
+    outline: none;
+  }
+  
+  .box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .title {
+    width: 341px;
+    height: 17px;
+    font-size: 14px;
+    color: #ffffff;
+    margin: 16px 0;
+  }
+  
+  input,
+  button {
+    border: none;
+    outline: none;
+    width: 321px;
+    height: 55px;
+    border-radius: 25px;
+    background-color: #f3f3f3;
+    padding: 0;
+  }
+  
+  .input_box {
+    display: flex;
+    width: 301px;
+    height: 55px;
+    border-radius: 25px;
+    background-color: #f3f3f3;
+    padding: 0 20px;
+  }
+  
+  .clear {
+    margin: 0 7px;
+  }
+  
+  hr {
+    width: 321.5px;
+    height: 0px;
+    border: solid 0.1px;
+    color: #999999;
+    margin-top: 33px;
+    margin-bottom: 10px;
+  }
+  
+  #submit {
+    width: 341px;
+    padding: 0;
+    margin-top: 40px;
+    color: #191919;
+    background-color: #999999;
+    position: fixed;
+  }
+  
+  .agreement_box {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .agreementBox {
+    width: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  #agreement {
+    width: 88px;
+    font-size: 14px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: -1px;
+  }
+  
+  #detail {
+    font-size: 14px;
+    color: #999999;
+    text-decoration: underline;
+    letter-spacing: -0.5px;
+  }
+  
+  input[type="checkbox"] {
+    display: none;
+  }
+  
+  input[id="checkbox"] + label {
+    width: 33px;
+    height: 33px;
+    flex-shrink: 0;
+    border: 1px solid var(--MAIN, #ffffff);
+    border-radius: 50%; /* 원형 체크박스 */
+    appearance: none; /* 기본 체크박스 스타일 제거 */
+    margin-left: 16px;
+  }
+  
+  input[id="checkbox"]:checked + label::after {
+    content: "";
+    display: block;
+    width: 150%; /* 디자인처럼 원형을 넘어가게 */
+    height: 150%; /* 디자인처럼 원형을 넘어가게 */
+    background-image: url("/static/img/base.html_check.svg"); /* 체크표시 이미지 경로 */
+    background-size: 100%; /* 원형 정도로 크기 맞춤 */
+    background-repeat: no-repeat; /* 이미지 반복 없음 */
+    transform: translate(-10%, -20%); /* 중앙으로 이동 */
+  }
+  

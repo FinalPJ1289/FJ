@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>커뮤니티</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/community.css' %}" />
+  </head>
+  <body>
+    <!-- 메인 콘텐츠 영역 -->
+    <article>
+      <!-- 헤더 -->
+      <header>
+        <h1>커뮤니티</h1>
+        <a href="{% url 'accounts:logout' %}" class="logout-btn">로그아웃</a>
+      </header>
+
+      <!-- 게시글 섹션 -->
+      <section class="content">
+        <div class="community-post">
+          <div class="post-title">게시글 제목</div>
+          <div class="post-body">게시글이 작성되면 내용이 여기에 표시됩니다.</div>
+          <div class="post-footer">
+            <div class="footer-buttons">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 푸터 -->
+      <footer>
+        <div class="button-box">
+          <a href="{% url 'accounts:mypage' %}">
+            <button class="footer-btn">
+              <img src="{% static 'img/base.html_mypage_active.svg' %}" alt="마이페이지" />
+            </button>
+          </a>
+        </div>
+      </footer>
+    </article>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const buttons = document.querySelectorAll(".footer-btn");
+        buttons.forEach((button) => {
+          button.addEventListener("click", () => {
+            buttons.forEach((btn) => {
+              btn.classList.remove("active");
+              const img = btn.querySelector("img");
+              img.src = img.src.replace("_active", "");
+            });
+            button.classList.add("active");
+            const img = button.querySelector("img");
+            img.src = img.src.replace(".svg", "_active.svg");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

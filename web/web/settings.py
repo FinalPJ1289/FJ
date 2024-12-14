@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # 앱
+    'accounts',
     'community',
 ]
 
@@ -127,3 +128,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'accounts.User'
+# settings.py
+LOGIN_REDIRECT_URL = 'accounts:home'  # 로그인 성공 시 홈 페이지로 리디렉션
