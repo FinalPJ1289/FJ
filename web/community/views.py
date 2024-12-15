@@ -103,3 +103,17 @@ def delete_comment(request, id):
     else:
         # 권한이 없는 경우 처리
         return redirect('community:post_detail', id=comment.linked_post.id)
+    
+# 검색 기능
+def search_posts(request):
+    query = request.GET.get('q', '')  # 'q'는 검색어 입력 필드의 이름
+    posts = Post.objects.all()
+
+    if query:  # 검색어가 입력된 경우 필터링
+        posts = posts.filter(title__icontains=query)  # 제목에 검색어 포함 여부 확인
+
+    context = {
+        'query': query,
+        'posts': posts,  # 검색 결과 게시글
+    }
+    return render(request, 'search_results.html', context)    

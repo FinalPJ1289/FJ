@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색 결과</title>
+    <link rel="stylesheet" href="{% static 'css/community.css' %}">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .search-info {
+            font-size: 1rem;
+            color: #888;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .post-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .post-item {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .post-item:hover {
+            background-color: #f0f8ff;
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-item h2 {
+            font-size: 1.1rem;
+            color: #333;
+            margin: 0;
+        }
+
+        .post-item .category {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .post-item .post-date {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .no-results {
+            font-size: 1rem;
+            text-align: center;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>검색 결과</h1>
+        <div class="search-info">
+            <p>검색어: "{{ query }}"</p>
+        </div>
+
+        {% if posts %}
+            <ul class="post-list">
+                {% for post in posts %}
+                    <li class="post-item">
+                        <div class="post-info">
+                            <h2><a href="{% url 'community:post_detail' post.id %}">{{ post.title }}</a></h2>
+                            <p class="category">{{ post.category.name }}</p>
+                        </div>
+                        <p class="post-date">{{ post.created_at|date:"Y-m-d H:i" }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-results">검색 결과가 없습니다.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

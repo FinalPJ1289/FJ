@@ -18,4 +18,7 @@ urlpatterns = [
     path('delete_comment/<int:id>', delete_comment, name = "delete_comment"),
     path('edit_post/<int:id>/', edit_post, name='edit_post'),
 
+    # 검색 URL 추가
+    path('search/', search_posts, name='search_posts'),
+
 ]
