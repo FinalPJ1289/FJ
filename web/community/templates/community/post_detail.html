@@ -1,0 +1,244 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>글 상세보기</title>
+</head>
+<header>
+    <style>
+        /* 기본 스타일 */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #222;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            width: 24px; /* 모바일에서 이미지 크기 조정 */
+            height: 24px;
+            vertical-align: middle;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px; /* 모바일에서 더 작은 여백 */
+        }
+
+        /* 게시글 스타일 */
+        .post-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 20px;
+            text-align: center; /* 중앙 정렬 */
+            width: 100%; /* 가로폭을 모바일에 맞춤 */
+        }
+
+        .post-meta p {
+            margin: 5px 0;
+        }
+
+        .post-body {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        /* 댓글 섹션 */
+        .comment-section {
+            max-width: 600px;
+            width: 100%;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .comment {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .comment b {
+            color: #007BFF;
+        }
+
+        /* 댓글 입력 폼 */
+        .comment-form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .comment-form textarea,
+        .comment-form input {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 1rem;
+        }
+
+        .comment-form input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .comment-form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem; /* 헤더 크기 축소 */
+            }
+
+            .post-meta {
+                font-size: 0.8rem;
+            }
+
+            .post-body {
+                padding: 10px; /* 내부 여백 축소 */
+            }
+
+            .comment-section {
+                padding: 10px;
+            }
+
+            .comment {
+                padding: 8px;
+            }
+
+            .comment-form input[type="submit"] {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.2rem; /* 더 작은 화면에 맞춰 축소 */
+            }
+
+            .post-meta {
+                font-size: 0.7rem;
+            }
+
+            .post-body {
+                padding: 8px; /* 모바일 소형 화면 여백 조정 */
+            }
+
+            .comment-section {
+                padding: 8px;
+            }
+
+            .comment {
+                padding: 6px;
+            }
+
+            .comment-form input[type="submit"] {
+                padding: 6px;
+                font-size: 0.8rem;
+            }
+
+            img {
+                width: 20px; /* 이미지 더 작게 */
+                height: 20px;
+            }
+        }
+    </style>
+</header>
+<body> 
+    <h1 class="post-header">
+        <a href="{% url 'community:community' 0 1 %}" class="back-button">
+            <img src="{% static 'images/arrow.png' %}" alt="뒤로가기">
+        </a>
+        <span class="post-title">{{ post.title }}</span>
+    </h1>     
+    <div class="post-meta">
+        <p>날짜: {{ post.created_at }}</p>
+        <p>카테고리: {{ post.category }}</p>
+        <p>작성자: {{ post.author }}</p>
+    </div>
+    <div class="post-body">
+        <p>{{ post.body }}</p>
+    </div>
+    <br>
+
+    <div class="comment-section">
+        <!-- <p>❤️{{ total_likes }}</p>
+        {% if is_liked %}
+        <form action="{% url 'community:remove_like' post.id %}" method="POST" class="like-form">
+            {% csrf_token %}
+            <button type="submit">✖️</button>
+        </form>
+        {% else %} -->
+        {% endif %}
+        {% if request.user == post.author %}
+        <form action="{% url 'community:delete_post' post.id %}" method="POST" class="delete-form">
+            {% csrf_token %}
+            <button type="submit">게시글 삭제</button>
+        </form>
+        <br>
+        <a href="{% url 'community:edit_post' post.id %}" class="edit-link">게시글 수정</a>
+        {% endif %}
+        <hr />
+        <h4>댓글</h4>
+        <form method="post" action="{% url 'community:create_comment' post.id %}" class="comment-form">
+            {% csrf_token %}
+            {{ comment_form }}
+            <input type="submit" />
+        </form>
+        {% for comment in comments %}
+        <div class="comment">
+            <b>{{ comment.author.nickname }} :</b> {{ comment.content }}
+            {% if request.user == comment.author %}
+            <form action="{% url 'community:delete_comment' comment.id %}" method="POST" class="comment-delete-form">
+                {% csrf_token %}
+                <button type="submit">삭제</button>
+            </form>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+

@@ -27,7 +27,7 @@ def login_view(request) :
     form=AuthenticationForm(request, data = request.POST)
     if form.is_valid():
         login(request, form.user_cache)
-        return redirect('accounts:home')
+        return redirect('community:community', category_id=0, sort_by=1)
     return render(request, 'accounts/login.html', {'form':form})
 
 def logout_view(request) :
@@ -40,6 +40,3 @@ def logout_view(request) :
 @login_required
 def mypage(request) :
     return render(request, 'accounts/mypage.html')
-
-def home(request) :
-    return render(request, 'accounts/home.html')

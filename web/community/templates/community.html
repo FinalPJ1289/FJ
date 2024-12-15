@@ -149,7 +149,12 @@
     <div class="container">
         <!-- Header -->
         <header>
-            <h1>커뮤니티</h1>
+            <h1>
+                커뮤니티
+                <a href="{% url 'accounts:mypage' %}">
+                    <button id="mypage"><img src="{% static 'img/base.html_mypage_active.svg' %}" alt="마이페이지" /></button>
+                </a>
+            </h1>
         </header>
 
         <!-- Sorting Options -->

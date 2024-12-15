@@ -2,6 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 
+# 카테고리 모델
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
 # 글쓰기 모델
 class Post(models.Model):
     title = models.CharField(verbose_name="제목", max_length=128)
@@ -9,16 +16,10 @@ class Post(models.Model):
     created_at = models.DateTimeField(verbose_name="작성일", auto_now_add=True)
 
     author = models.ForeignKey("accounts.User", on_delete=models.CASCADE, null=True, blank=True)
-    
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)  # 추가된 부분
+
     def __str__(self):
         return self.title
-
-# 카테고리 모델
-class Category(models.Model):
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
     
 # 댓글모델
 class Comment(models.Model):
