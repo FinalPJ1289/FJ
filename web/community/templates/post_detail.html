@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>글 상세보기</title>
+    <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+</head>
+<body><a href="{% url 'community:community' 0 1 %}"><img src="{% static 'images/runnerMypage/Arrow - Left 4.png' %}" /></a>
+    <h1>{{ post.title }}</h1>
+    <div class="post-meta">
+        <p>날짜: {{ post.created_at }}</p>
+        <p>카테고리: {{ post.category }}</p>
+        <p>작성자: {{ profile.nickname }}</p>
+    </div>
+    <div class="post-body">
+        <p>{{ post.body }}</p>
+    </div>
+    <br>
+
+    <div class="comment-section">
+        <p>❤️{{ total_likes }}</p>
+        {% if is_liked %}
+        <form action="{% url 'community:remove_like' post.id %}" method="POST" class="like-form">
+            {% csrf_token %}
+            <button type="submit">✖️</button>
+        </form>
+        {% else %}
+        <form action="{% url 'community:add_like' post.id %}" method="POST" class="like-form">
+            {% csrf_token %}
+            <button type="submit">❤️</button>
+        </form>
+        {% endif %}
+        {% if request.user == post.author %}
+        <form action="{% url 'community:delete_post' post.id %}" method="POST" class="delete-form">
+            {% csrf_token %}
+            <button type="submit">삭제</button>
+        </form>
+        <br>
+        <a href="{% url 'community:edit_post' post.id %}" class="edit-link">수정</a>
+        {% endif %}
+        <hr />
+        <h4>댓글 {{ total_comments }}개</h4>
+        <form method="post" action="{% url 'community:create_comment' post.id %}" class="comment-form">
+            {% csrf_token %}
+            {{ comment_form }}
+            <input type="submit" />
+        </form>
+        {% for comment in comments %}
+        <div class="comment">
+            <b>{{ comment.com_nickname }} :</b> {{ comment.com_content }}
+            {% if request.user == comment.author %}
+            <form action="{% url 'community:delete_comment' comment.id %}" method="POST" class="comment-delete-form">
+                {% csrf_token %}
+                <button type="submit">삭제</button>
+            </form>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+

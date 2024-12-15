@@ -25,4 +25,8 @@ class SignUpForm(UserCreationForm):
         if commit:
             user.save()
         return user
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password2'].help_text = ""  # 도움말 문구 제거
 

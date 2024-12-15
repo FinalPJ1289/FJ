@@ -54,3 +54,23 @@ def edit_post(request, id):
 
     return render(request, 'edit_post.html', {'form': form, 'post': post})
 
+def post_detail(request, id):
+    post = get_object_or_404(Post, id=id)
+    comment_form = CommentForm(request.POST or None)  # POST 데이터가 있으면 폼에 채운다.
+    
+    if request.method == 'POST' and comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.linked_post = post
+        comment.author = request.user  # 현재 로그인한 사용자 설정
+        comment.save()
+        return redirect('community:post_detail', id=post.id)
+    
+    comments = Comment.objects.filter(linked_post=post).order_by('created_at')
+    
+    context = {
+        'post': post,
+        'comment_form': comment_form,  # CommentForm을 컨텍스트에 추가
+        'comments': comments,
+    }
+    
+    return render(request, 'community/post_detail.html', context)

@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    font-family:'pretendard';
+}
+
+.post-meta {
+    font-size: 0.9em;
+    color: gray;
+    margin-bottom: 20px;
+}
+
+.post-meta p {
+    margin: 5px 0;
+}
+
+.post-body {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.like-form, .delete-form, .edit-link, .comment-form, .comment-delete-form {
+    display: inline-block;
+    margin: 10px 0;
+}
+
+button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+button:hover {
+    background-color: #e0e0e0;
+}
+
+a {
+    color: #0066cc;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.comment-section {
+    margin-top: 20px;
+}
+
+.comment-section h4 {
+    margin-bottom: 10px;
+}
+
+.comment {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.comment b {
+    font-weight: bold;
+}
+
+.comment form {
+    display: inline;
+}
+
+.comment input[type="submit"] {
+    margin-top: 10px;
+}

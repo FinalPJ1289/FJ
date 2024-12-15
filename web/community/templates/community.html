@@ -6,21 +6,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>커뮤니티</title>
     <link rel="stylesheet" href="{% static 'css/community.css' %}">
+    <style>
+        /* Reset some default browser styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 기본 레이아웃 */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        /* 컨테이너 */
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 헤더 스타일 */
+        header {
+            display: flex;
+            justify-content: center;  /* 수평 중앙 정렬 */
+            align-items: center;      /* 수직 중앙 정렬 */
+            text-align: center;       /* 텍스트 중앙 정렬 */
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-family: 'pretendard', sans-serif;  /* 폰트 변경 */
+            font-size: 1.5rem;  /* 글씨 크기 작게 */
+            margin-bottom: 10px;
+            font-weight: normal;  /* 폰트 두께를 일반으로 변경 */
+            color: #333;
+        }
+        /* 정렬 옵션 스타일 */
+        .sort-options {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .sort-options a {
+            margin: 0 8px;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .sort-options a.active {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        /* 게시글 리스트 */
+        .posts {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .post {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .post h2 {
+            font-size: 1.0rem;
+            font-weight: bold;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-right: 10px;
+        }
+
+        .post .category {
+            font-size: 0.9rem;
+            color: #666;
+            margin-right: 10px;
+        }
+
+        .post .post-date {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        /* 글쓰기 버튼 */
+        .write-button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .write-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* 로그인 후 글쓰기 안내 */
+        .login-prompt {
+            text-align: center;
+            font-size: 1rem;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        /* 게시글이 없을 때 */
+        .no-posts {
+            text-align: center;
+            font-size: 1rem;
+            color: #888;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <!-- Header -->
         <header>
             <h1>커뮤니티</h1>
-            <nav>
-                <a href="{% url 'community:community' category_id=0 sort_by=1 %}" class="{% if category_id == 0 %}active{% endif %}">전체</a>
-                {% for category in categories %}
-                    <a href="{% url 'community:community' category_id=category.id sort_by=1 %}" 
-                       class="{% if category_id == category.id %}active{% endif %}">
-                       {{ category.name }}
-                    </a>
-                {% endfor %}
-            </nav>
         </header>
 
         <!-- Sorting Options -->
@@ -38,11 +167,7 @@
                     <a href="{% url 'community:post_detail' post_block.post.id %}" class="post">
                         <h2>{{ post_block.post.title|truncatechars:20 }}</h2>
                         <p class="category">{{ post_block.post.category.name }}</p>
-                        <div class="post-stats">
-                            <span>♡{{ post_block.like_count }} | 댓글: {{ post_block.comment_count }}</span>
-                            <span>작성자: {{ post_block.post.author.username }}</span>
-                            <span>{{ post_block.post.created_at|date:"Y-m-d H:i" }}</span>
-                        </div>
+                        <span class="post-date">{{ post_block.post.created_at|date:"Y-m-d H:i" }}</span>
                     </a>
                 {% endfor %}
             {% else %}

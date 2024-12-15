@@ -1,9 +1,117 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>회원가입</title>
+    <style>
+      @font-face {
+        font-family: "NotoSerifKR";
+        src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NotoSerifKR.woff") format("woff");
+      }
+
+      body {
+        font-family: "NotoSerifKR", sans-serif;
+        background-color: #f6e6ff; /* 연보라빛 배경 */
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* 전체 화면 높이에 맞춤 */
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #ffffff;
+        padding: 30px 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+      }
+
+      h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #4a4a4a;
+      }
+
+      input,
+      button {
+        border: none;
+        outline: none;
+        width: 100%; /* 폼 너비에 맞게 입력 필드와 버튼 너비를 설정 */
+        max-width: 350px; /* 최대 너비를 제한하여 화면 크기에 따라 조정 */
+        height: 50px;
+        margin-top: 7px;
+        border-radius: 25px;
+        font-size: 16px;
+      }
+
+      input {
+        background-color: #f3f3f3;
+        padding: 0 15px;
+        color: #4a4a4a;
+      }
+
+      button {
+        background-color: #a06cd5; /* 보라색 버튼 */
+        color: #ffffff;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #7b49b2; /* 버튼 호버 효과 */
+      }
+
+      .agreement_box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      .agreementBox {
+        display: flex;
+        align-items: center;
+      }
+
+      #agreement {
+        margin-left: 10px;
+        font-size: 14px;
+        color: #4a4a4a;
+      }
+
+      input[type="checkbox"] {
+        display: none;
+      }
+
+      input[id="checkbox"] + label {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        border: 2px solid #a06cd5;
+        border-radius: 3px;
+        position: relative;
+        cursor: pointer;
+      }
+
+      input[id="checkbox"]:checked + label::after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 6px;
+        width: 5px;
+        height: 10px;
+        border: solid #a06cd5;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    </style>
   </head>
   <body>
     <form method="post" action="{% url 'accounts:signup' %}">
@@ -11,6 +119,6 @@
       {% csrf_token %}
       {{ form.as_p }}
       <button type="submit">SIGN-UP</button>
-  </form>  
+    </form>
   </body>
 </html>

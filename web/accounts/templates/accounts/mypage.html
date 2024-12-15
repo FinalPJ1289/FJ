@@ -8,12 +8,18 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/mypage.css' %}" />
     <style>
+      @font-face {
+        font-family: "NotoSerifKR";
+        src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NotoSerifKR.woff") format("woff");
+      }
+
       body {
+        font-family: "NotoSerifKR", sans-serif; /* 폰트 설정 */
         margin: 0;
         padding: 0;
         display: flex;
-        justify-content: flex-start;
-        align-items: flex-start;
+        justify-content: center; /* 수평 중앙 정렬 */
+        align-items: center; /* 수직 중앙 정렬 */
         min-height: 100vh;
         background-color: #efefef;
       }
@@ -26,6 +32,85 @@
         position: relative;
         top: 0;
         left: 0;
+        color: #ffffff; /* 글씨 색을 흰색으로 */
+        padding: 20px;
+      }
+
+      header .title_line .date {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ffffff; /* 날짜 텍스트 색상 */
+      }
+
+      .secBox {
+        margin-top: 30px;
+      }
+
+      .sec1 {
+        font-size: 18px;
+        line-height: 1.6;
+        color: #ffffff; /* 글씨 색 흰색 */
+      }
+
+      .sec1 #mimo {
+        color: #a06cd5; /* 강조 색상 */
+      }
+
+      .sec1 #bold {
+        font-weight: bold;
+        color: #a06cd5; /* 강조 색상 */
+      }
+
+      .logoutBtn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #a06cd5;
+        color: #ffffff;
+        font-weight: bold;
+        border-radius: 25px;
+        text-decoration: none;
+        text-align: center;
+      }
+
+      .logoutBtn:hover {
+        background-color: #7b49b2; /* 호버 색상 */
+      }
+
+      .sec2 .box {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+      }
+
+      .sec2 .box img {
+        width: 50px; /* 이미지 크기 조정 */
+        height: auto;
+      }
+
+      footer {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .button_box button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+      }
+
+      .button_box button img {
+        width: 30px;
+        height: auto;
+      }
+
+      .button_box button.active img {
+        filter: brightness(1.5); /* 활성화된 버튼 이미지 강조 */
       }
     </style>
   </head>
@@ -38,25 +123,17 @@
       </header>
       <section class="secBox">
         <section class="sec1">
-          <p><span id="mimo">MIMO</span>와 함께 활기찬 하루를 보낼<br /><span id="bold">{{ user.username }}</span>님을 응원합니다.</p>
+          <p><span id="mimo">TalkingWith</span>와 함께 활기찬 하루를 보낼<br /><span id="bold">{{ user.username }}</span>님을 응원합니다.</p>
           <a href="{% url 'accounts:login' %}" class="logoutBtn">로그아웃</a>
-        </section>
-
-        <section class="sec2">
-          <div class="box" id="box1">
-            <img src="{% static 'img/mypage.html_profile.svg' %}" alt="회원정보 수정" />
-          </div>
-          <div class="box">
-          </div>
-          <div class="box">
-            <img src="{% static 'img/mypage.html_premium.svg' %}" alt="요금제" />
-          </div>
+          <p><a href="{% url 'accounts:home' %}" class="logoutBtn">메인화면</a></p>
         </section>
       </section>
       <footer>
         <div class="button_box">
           <a href="{% url 'accounts:mypage' %}">
-            <button id="mypage"><img src="{% static 'img/base.html_mypage_active.svg' %}" alt="마이페이지" /></button>
+            <button id="mypage">
+              <img src="{% static 'img/base.html_mypage_active.svg' %}" alt="마이페이지" />
+            </button>
           </a>
         </div>
       </footer>

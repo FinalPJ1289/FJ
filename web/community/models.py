@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 # 글쓰기 모델
 class Post(models.Model):
@@ -18,3 +19,13 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+# 댓글모델
+class Comment(models.Model):
+    linked_post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment')
+    content = models.CharField(max_length=300, verbose_name="내용", default="")
+    created_at = models.DateTimeField(verbose_name="작성일", auto_now_add=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name='my_comment')  # 변경된 부분
+
+    def __str__(self):  
+        return self.content
