@@ -196,22 +196,19 @@
     <div class="post-meta">
         <p>날짜: {{ post.created_at }}</p>
         <p>카테고리: {{ post.category }}</p>
-        <p>작성자: {{ post.author }}</p>
+      <p>작성자: 
+            {% if post.anonymous %}
+                익명
+            {% else %}
+                {{ post.author.username }}
+            {% endif %}
+        </p>  
     </div>
     <div class="post-body">
         <p>{{ post.body }}</p>
     </div>
     <br>
-
     <div class="comment-section">
-        <!-- <p>❤️{{ total_likes }}</p>
-        {% if is_liked %}
-        <form action="{% url 'community:remove_like' post.id %}" method="POST" class="like-form">
-            {% csrf_token %}
-            <button type="submit">✖️</button>
-        </form>
-        {% else %} -->
-        {% endif %}
         {% if request.user == post.author %}
         <form action="{% url 'community:delete_post' post.id %}" method="POST" class="delete-form">
             {% csrf_token %}

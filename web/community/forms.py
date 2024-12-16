@@ -7,7 +7,6 @@ class PostForm(forms.ModelForm):
         widget = forms.Select,
         required = True
     )
-
     class Meta:
         model = Post
         fields = ['title', 'body', 'category']

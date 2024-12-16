@@ -97,9 +97,15 @@
 <body>
     <h1>커뮤니티 새글작성</h1>
     <form method="post">
-        {% csrf_token %} 
+        {% csrf_token %}
+        <input type="hidden" name="anonymous" value="n"> <!-- 기본값 -->
+        <label>
+            <input type="checkbox" name="anonymous" value="y">
+            익명
+        </label>
         {{ form.as_p }}
         <button type="submit">새글등록</button>
     </form>
+    
 </body>
 </html>

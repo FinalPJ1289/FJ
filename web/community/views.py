@@ -32,6 +32,12 @@ def create_post(request): # create
         if form.is_valid(): 
             unfinished_form = form.save(commit=False)
             unfinished_form.author = request.user
+            # 익명처리
+            anonymous = request.POST.get('anonymous', 'n')
+            if anonymous == 'y':
+                unfinished_form.anonymous = True
+            else: # 익명처리 안했을경우
+                unfinished_form.anonymous = False  # 명시적으로 False 설정
             unfinished_form.save()
             return redirect('community:community', category_id=0, sort_by=1)
     else:
