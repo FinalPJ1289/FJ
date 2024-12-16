@@ -4,6 +4,95 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>게시글 수정</title>
+    <style>
+              /* 기본 스타일 */
+              body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fc;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            color: #2c3e50;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* 폼 스타일 */
+        form {
+            width: 90%;
+            max-width: 500px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* CSRF 토큰 숨기기 */
+        .csrf-token {
+            display: none;
+        }
+
+        /* 입력 필드 스타일 */
+        input[type="text"], input[type="password"], textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        /* 버튼 스타일 */
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #3498db;
+            color: white;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        /* 폼 필드 레이블 */
+        label {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* 모바일 최적화 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.6em;
+            }
+            form {
+                width: 90%;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.4em;
+            }
+            button {
+                font-size: 1em;
+            }
+        }
+    </style>
   </head>
   <body>
     <h1>게시글 수정</h1>

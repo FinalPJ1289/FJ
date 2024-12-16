@@ -17,6 +17,7 @@ class Post(models.Model):
 
     author = models.ForeignKey("accounts.User", on_delete=models.CASCADE, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)  # 추가된 부분
+    anonymous = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
